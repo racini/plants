@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import {Plant} from "../entities/plant";
+import {HttpClient, HttpClientModule, HttpErrorResponse} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
+
+class PlantDetail {
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlantsService {
+export class PlantService {
 
   constructor(private http: HttpClient) { }
 
-  getPlantDetails(): Observable<Plant[]> {
-    return this.http.get<Plant[]>(environment.plantsUrl).pipe(
+  getAllPlants(): Observable<Array<PlantDetail>> {
+    return this.http.get<PlantDetail[]>(environment.plantsUrl).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
         return throwError(
           () =>

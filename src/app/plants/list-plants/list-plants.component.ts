@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Plant} from "../../entities/plant";
 
 @Component({
   selector: 'app-list-plants',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./list-plants.component.scss']
 })
 export class ListPlantsComponent {
+
+  plantList : Plant[] = []
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
 
 }
