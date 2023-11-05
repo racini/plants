@@ -10,6 +10,8 @@ import {PlantService} from "../plant.service";
 export class ListPlantsComponent {
 
   plantList : Plant[] = []
+  plantasInterior: number = 0;
+  plantasExterior: number = 0;
 
   constructor(private plantsService: PlantService) { }
 
@@ -21,6 +23,8 @@ export class ListPlantsComponent {
     this.plantsService.getAllPlants().subscribe({
       next: (plantList: Plant[]) => {
         this.plantList = plantList
+        this.plantasExterior = this.plantList.filter(plant => plant.tipo === 'Exterior').length
+        this.plantasInterior = this.plantList.filter(plant => plant.tipo === 'Interior').length
       },
       error: (error) => {
         console.log('Error fetching plants', error)
