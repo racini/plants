@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Plant} from "../../entities/plant";
+import {PlantService} from "../plant.service";
 
 @Component({
   selector: 'app-list-plants',
@@ -10,10 +11,20 @@ export class ListPlantsComponent {
 
   plantList : Plant[] = []
 
-  constructor() { }
+  constructor(private plantsService: PlantService) { }
 
   ngOnInit(): void {
-
+    this.getPlantList()
   }
 
+  getPlantList() {
+    this.plantsService.getAllPlants().subscribe({
+      next: (plantList: Plant[]) => {
+        this.plantList = plantList
+      },
+      error: (error) => {
+        console.log('Error fetching plants', error)
+      }
+    })
+  }
 }
